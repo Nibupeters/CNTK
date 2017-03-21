@@ -22,7 +22,10 @@ def test_reasonet(device_id):
   print("Device Id: {0}".format(device_id))
   if device_id < 0:
     pytest.skip('test only runs on GPU')
-    #return
+    
+  if sys.version_info[0] < 3:
+    pytest.skip('test only runs on Python 3.x')
+
   device.set_default_device(cntk_device(device_id))
   data_path = os.path.join(module_path, "data/test.txt")
   eval_path = os.path.join(module_path, "data/test.txt")
